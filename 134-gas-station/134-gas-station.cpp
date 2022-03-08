@@ -13,7 +13,6 @@ public:
         
         for(auto x: f)sum+=x;
         
-        int ans=0;
         
         if(sum>=0)
         {
@@ -23,8 +22,6 @@ public:
         
         for(int i =0; i<gas.size(); i++){
             
-
-            totalcost = totalcost + (gas[i] - cost[i]);
             currcost = currcost + (gas[i] - cost[i]);
             
 
@@ -34,16 +31,12 @@ public:
             }
         }
         
-
-        if(totalcost >= 0)
         return startIndex;
-            
         }
         else
         {
             return -1;
         }
-        
-        return ans;
+    return 0;
     }
 };
