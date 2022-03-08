@@ -2,36 +2,29 @@ class Solution {
 public:
     int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
         
-        vector<int>f;
+        int sum=0;
         
         for(int i=0; i<gas.size(); i++)
         {
-            f.push_back(gas[i]-cost[i]);
+            sum+= gas[i]-cost[i];
         }
-        
-        int sum=0;
-        
-        for(auto x: f)sum+=x;
-        
         
         if(sum>=0)
         {
-            int totalcost = 0;
-        int currcost = 0;
-        int startIndex = 0;
-        
-        for(int i =0; i<gas.size(); i++){
-            
-            currcost = currcost + (gas[i] - cost[i]);
-            
+            int curr = 0;
+            int s = 0;
 
-            if(currcost < 0){
-                currcost = 0;
-                startIndex = i +1;
+            for(int i =0; i<gas.size(); i++){
+
+                curr = curr + (gas[i] - cost[i]);
+
+                if(curr< 0){
+                    curr = 0;
+                    s = i +1;
+                }
             }
-        }
-        
-        return startIndex;
+
+            return s;
         }
         else
         {
