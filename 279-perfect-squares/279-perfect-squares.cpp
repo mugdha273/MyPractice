@@ -1,8 +1,8 @@
 class Solution {
 public:
     
-    int coinChange(vector<long long int>& coins, int sum) {
-        int N = coins.size();
+    int numbers(vector<long long int>& vec, int sum) {
+        int N = vec.size();
         int dp[N+1][sum+1];
         
          for(int i=0; i<sum+1; i++) dp[0][i] = INT_MAX-1;
@@ -14,9 +14,9 @@ public:
             {
                 
                 
-                if(coins[i-1]<=j)
+                if(vec[i-1]<=j)
                 {
-                    dp[i][j] = min(dp[i-1][j], 1+dp[i][j-coins[i-1]]);
+                    dp[i][j] = min(dp[i-1][j], 1+dp[i][j-vec[i-1]]);
                 }
                 else
                 {
@@ -46,7 +46,7 @@ public:
         //     cout<<x<<" ";
         // }
         
-        return coinChange(vec, n);
+        return numbers(vec, n);
         
     }
 };
