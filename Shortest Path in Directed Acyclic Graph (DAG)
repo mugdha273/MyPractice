@@ -1,5 +1,5 @@
 ```
-
+//dfs jaisa he hai bs stack use kar lo!!
 void findTopoSort(int node, vector<int> &vis, stack<int> &st, vector<int> adj[])
 {
   vis[node] = 1
@@ -37,7 +37,6 @@ void shortestPath(int src, int N, vector<int>adj[])
   
   dist[src]=0;
   
-  vector<int> topo;
   while(!st.empty())
   {
     int node= st.top();
@@ -45,7 +44,7 @@ void shortestPath(int src, int N, vector<int>adj[])
     
     if(dist[node] !=INF)
     {
-      for(auto it: adj[node]
+      for(auto it: adj[node])
       {
         if(dist[node] + it.second < dist[it.first])
         {
