@@ -5,7 +5,6 @@ public:
         if(intervals.size()<=1) return intervals;
         sort(intervals.begin(), intervals.end());
         
-        
         vector<vector<int>>ans;
         
         int s = intervals[0][0];
@@ -13,19 +12,19 @@ public:
         
         for(int i=1; i<intervals.size(); i++)
         {
-            if(intervals[i][0]>e)
+            
+            if(e<intervals[i][0])
             {
-                ans.push_back({s,e});
-                s= intervals[i][0];
-                e= intervals[i][1];
+               ans.push_back({s,e});
+                s = intervals[i][0];
+                e = intervals[i][1];
             }
-            else if(intervals[i][0]<=e)
-            {
-                e = max(e, intervals[i][1]);
+            else if (e>=intervals[i][0]) {
+                e = max(e,intervals[i][1]);
             }
+            
         }
         ans.push_back({s,e});
         return ans;
-        
     }
 };
