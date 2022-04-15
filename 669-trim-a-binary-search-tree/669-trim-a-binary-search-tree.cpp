@@ -9,6 +9,7 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+//**********************************NOICEEE SOLUTION BRO!!*************************************
 class Solution {
 public:
     TreeNode* trimleft(TreeNode* root, int low)
