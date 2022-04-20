@@ -7,6 +7,18 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+
+/*Approach:
+Make tree as graph
+push all parents into map (root, its parent) as you can not traverse upward in tree.
+Now use level order/ BFS.
+for ex, when you are standing at 5, push its right, left and parent(you'll access this using map which you used to store the parents) into queue. this will be your level 1;
+
+now push l (null), r(null), parent(5, already seen) of 6; l(7), r(4), parent(5, already seen); 3's parent(1, not seen), 3's r (1), 3's l (5, already seen); hence this level is completed and value of level is 2; pop now.
+
+*/
+
+
 class Solution {
 public:
     unordered_map<TreeNode*, TreeNode*>mp;
