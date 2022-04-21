@@ -16,8 +16,7 @@ public:
         int sum=0;
         if(root==NULL) return 0;
         
-        sum += sumEvenGrandparent(root->left);
-        if(root->val%2 == 0)
+          if(root->val%2 == 0)
         {
             if(root->left!=NULL) 
         {
@@ -31,6 +30,9 @@ public:
             if(root->right->right !=NULL) sum += root->right->right->val;   
         }
         }
+        
+        sum += sumEvenGrandparent(root->left);
+      
         
         
         sum +=sumEvenGrandparent(root->right);
