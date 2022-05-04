@@ -1,20 +1,17 @@
 class Solution {
 public:
     int findDuplicate(vector<int>& nums) {
-        int n=nums.size();
-        vector<int> v(n+1,0);
-        for(int i=0;i<nums.size();i++)
-        {
-            if(v[nums[i]]!=0)
-            {
-                return nums[i];
-            }
-            else
-            {
-                v[nums[i]]++;
-            }    
+        int n= nums.size();
+            for (int i = 0; i < n; i++) {
+            nums[nums[i] % n]
+                = nums[nums[i] % n] + n;
         }
-        return -1;
+        for (int i = 0; i < n; i++) {
+            if (nums[i] >= n * 2) {
+                return i;
+            }
+        }
         
+        return 0;
     }
 };
