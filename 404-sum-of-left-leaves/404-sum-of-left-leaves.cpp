@@ -11,6 +11,8 @@
  */
 class Solution {
 public:
+    int ans=0;
+    
     bool isLeaf(TreeNode* root)
     {
         if(root==NULL) return false;
@@ -19,13 +21,22 @@ public:
         
         return false;
     }
-    
+    void helper(TreeNode* root)
+    {
+        if(root==NULL) return;
+        if(root->left!=NULL && isLeaf(root->left))
+        {
+            ans+= root->left->val;
+        }
+        helper(root->left);
+        helper(root->right);
+            
+    }
     int sumOfLeftLeaves(TreeNode* root) {
         if(root==NULL) return 0;
+        helper(root);
         
-        if(isLeaf(root->left)) return root->left->val+sumOfLeftLeaves(root->right);
-        
-        return sumOfLeftLeaves(root->right)+sumOfLeftLeaves(root->left);
+        return ans;
         
     }
 };
