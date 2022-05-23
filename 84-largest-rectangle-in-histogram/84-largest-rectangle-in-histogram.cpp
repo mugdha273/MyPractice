@@ -5,12 +5,12 @@ public:
     int n=a.size();
     vector<int>left;
     stack<pair<int,int>>st;
-    int placeholder=-1;
+
     for(int i=0;i<n;i++)
     {
         if(st.size()==0)
         {
-            left.push_back(placeholder);
+            left.push_back(-1);
             st.push({a[i],i});
         }
         else if(st.size()>0 && st.top().first<a[i])
@@ -26,7 +26,7 @@ public:
             }
             if(st.size()==0)
             {
-                left.push_back(placeholder);
+                left.push_back(-1);
                 st.push({a[i],i});
             }
             else
@@ -44,12 +44,11 @@ vector<int> nsr(vector<int>&a)
     int n=a.size();
     vector<int>right;
     stack<pair<int,int>>st;
-    int placeholder=n;
     for(int i=n-1;i>=0;i--)
     {
         if(st.size()==0)
         {
-            right.push_back(placeholder);
+            right.push_back(n);
             st.push({a[i],i});
         }
         else if(st.size()>0 && st.top().first<a[i])
@@ -65,7 +64,7 @@ vector<int> nsr(vector<int>&a)
             }
             if(st.size()==0)
             {
-                right.push_back(placeholder);
+                right.push_back(n);
                 st.push({a[i],i});
             }
             else
@@ -83,22 +82,15 @@ vector<int> nsr(vector<int>&a)
         int n=a.size();
          vector<int>left=nsl(a);
     vector<int>right=nsr(a);
-    int width[n];
-    for(int i=0;i<n;i++)
-    {
-        width[i]=right[i]-left[i]-1;
-    }
-    int ans[n];
+
+    int ans=0;
     for(int i=0;i<n;i++)
     {
         
-        ans[i]=a[i]*width[i];
+        ans=max(ans,a[i]*(right[i]-left[i]-1));
     }
-    int maxi=0;
-    for(int i=0;i<n;i++)
-    maxi=max(maxi,ans[i]);
-    return maxi;
         
+    return ans;
         
     }
 };
