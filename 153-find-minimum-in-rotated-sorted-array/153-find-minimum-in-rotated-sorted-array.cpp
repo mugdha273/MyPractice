@@ -1,32 +1,19 @@
 class Solution {
 public:
-    int findMin(vector<int>& a) {
-        int mid, prev, next;
-        int high = a.size()-1, low=0;
-        int n = high-low+1;
+    int findMin(vector<int>& nums) {
+        int high= nums.size()-1;
+        int low=0;
+        int n = nums.size();
         
-        while(low <= high)
+        while(low<=high)
         {
-            if(a[low] <= a[high])
-            {
-                return a[low];
-            }
-            mid = low + (high-low)/2;
-            prev = (mid+n-1)%n;
-            next = (mid+1)%n;
-            if(a[mid] <= a[prev] && a[mid] <= a[next])
-            {
-                return a[mid];
-            }
-            else if(a[low] <= a[mid])
-            {
-                low = mid+1;
-            }
-            else
-            {
-                high = mid-1;
-            }
-        }
+            int mid = low + (high-low)/2;
+            if(nums[low]<=nums[high]) return nums[low];
+            if(nums[mid]<= nums[(mid+1)%n] && nums[mid]<=nums[(mid+n-1)%n]) return nums[mid];
+            else if(nums[mid]>= nums[low]) low = mid+1;
+            else high= mid-1;
+        }   
+        
         return -1;
     }
 };
