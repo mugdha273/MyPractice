@@ -1,36 +1,42 @@
 class Solution {
 public:
-    int search(vector<int>& nums, int target) {
+    int getmin(vector<int>& nums)
+    {
+        int high= nums.size()-1;
+        int low = 0;
+        int n= nums.size();
         
-        int l=0, h= nums.size()-1;
-        
-        while(l<=h)
+        while(low<=high)
         {
-            int mid= (l+h)/2;
+            int mid = low+(high-low)/2;
+            if(nums[low]<nums[high]) return low;
             
-            if(nums[mid] == target) return mid;
+            if(nums[mid]<= nums[(mid-1+n)%n] && nums[mid]<= nums[(mid+1)%n]) return mid;
             
-            if(nums[mid]>= nums[l])
-            {
-                if(target>= nums[l] && target<=nums[mid])
-                {
-                    h = mid-1;
-                }
-                else l = mid+1;
-            }
-            
-            else
-            {
-                if(target>= nums[mid] && target<=nums[h])
-                {
-                    l = mid+1;
-                }
-                else h = mid-1;
-            }
-            
+            else if(nums[mid]>= nums[low]) low = mid+1;
+            else high = mid-1;
         }
         
+        return 0;
+    }
+    
+    int binarySearch(int low, int high, int target, vector<int>& nums)
+    {
+        while(low<=high)
+        {
+            int mid = low+ (high-low)/2;
+            if(nums[mid]==target) return mid;
+            else if(nums[mid]>target) high= mid-1;
+            else low=mid+1;
+        }
         return -1;
-        
+    }
+    
+    int search(vector<int>& nums, int target) {
+        int idx = getmin(nums);
+        int n= nums.size();
+
+        if(target> nums[n-1]) return binarySearch(0, idx-1, target, nums);
+        return binarySearch(idx, n-1, target, nums);
     }
 };
