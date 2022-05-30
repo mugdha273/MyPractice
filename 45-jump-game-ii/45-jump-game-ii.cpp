@@ -7,7 +7,7 @@ public:
         
         while(r<n-1)
         {   
-            int reach=0;
+            int reach=nums[l];
          
             for(int i=l;i<=r; i++)
             {
