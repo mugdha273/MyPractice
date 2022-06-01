@@ -1,3 +1,4 @@
+//The appraoch goes like: rather than incrementing n-1 elements, simply make all elements equal to minimum element (choose the highest element and decrease it by 1 in one move.)
 class Solution {
 public:
     int minMoves(vector<int>& nums) {
