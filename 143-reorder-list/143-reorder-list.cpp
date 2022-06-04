@@ -10,58 +10,59 @@
  */
 class Solution {
 public:
-    void reorderList(ListNode* head) {
-        if(head->next!=NULL) 
-        {     
-        ListNode *slow=head;
-        ListNode *fast=head->next;
-        
-
+    ListNode* getMid(ListNode* head)
+    {
+        ListNode* slow= head;
+        ListNode* fast = head->next;
         while(fast!=NULL && fast->next!=NULL)
         {
-            slow=slow->next;
-            fast=fast->next->next;
-        }
-        ListNode *curr=slow->next;
-        slow->next=NULL;
-        
-
-        ListNode *prev=NULL;
-        ListNode *nextt=curr->next;
-        while(curr!=NULL)
-        {
-            curr->next=prev;
-            prev=curr;
-            curr=nextt;
-            if(nextt==NULL)
-                continue;
-            nextt=nextt->next;
-        }
-        
-
-        ListNode *temp1=head->next;
-        ListNode *temp2=prev->next;
-        while(head->next!=NULL && prev->next!=NULL)
-        {
-            head->next=prev;
-            head=temp1;
-            temp1=temp1->next;
+            slow= slow->next;
+            fast= fast->next->next;
             
-            prev->next=head;
-            prev=temp2;
-            temp2=temp2->next;
-        }
-        if(head->next==NULL)
-        {
-            head->next=prev;
-        }
-        else
-        {
-            head->next=prev;
-            prev->next=temp1;
         }
         
+        return slow;
+    }
+    
+    ListNode *reverse(ListNode *head){
+		if(!head || !head->next) return head;
+		ListNode *curr=head,*prev=nullptr,*next;
+		while(curr){
+			 next=curr->next;
+			 curr->next=prev;
+			 prev=curr;
+			 curr=next;
+		}
+		return prev;
+	}
+
+    
+    void reorderList(ListNode* head) {
+        if(!head || !head->next)
+            return;
+        
+        ListNode* mid= getMid(head);
+        ListNode* head2= mid->next;
+        mid->next= NULL;
+        
+        ListNode* curr2 = reverse(head2);
+        ListNode* curr1 = head, *temp1, *temp2;
+        
+        while(curr1 || curr2) {
+            if(curr1) {
+                temp1 = curr1->next;
+                curr1->next = curr2;
+                curr1 = temp1;
+            }
+            if(curr2) {
+                temp2 = curr2->next; 
+                curr2->next = temp1;
+                curr2 = temp2;
+            }
         }
+
+
+        
         
     }
 };
