@@ -1,6 +1,5 @@
 class Solution {
-private:
-    
+public:
     map<char, string> m = {
         {'2', "abc"}, {'3', "def"}, {'4', "ghi"},
         {'5', "jkl"}, {'6', "mno"}, {'7', "pqrs"},
@@ -9,31 +8,26 @@ private:
     
     vector<string>result;
     
-    public:
-    vector<string> letterCombinations(string digits) {
-        
-        if(digits.size() == 0)return result;
-        
-        generateCombinations("", digits,0);
-        
-        return result;
-    }
-    
-    void generateCombinations(string curr, string digits, int index)
+    void helper(int i, string s, string digits)
     {
-        if(index== digits.size())result.push_back(curr);
-        
-        else
+        if(s.length()==digits.size())
         {
-            char currD = digits[index];
-            string mapping = m[currD];
-            
-            for(int i=0; i<mapping.size(); i++)
-                generateCombinations(curr+ mapping[i], digits, index+1);
+            result.push_back(s);
+            return;
+        }
+        string mapping = m[digits[i]];
+        
+        for(int p= 0; p<mapping.size();p++)
+        {
+            helper(i+1,s+mapping[p],digits);
         }
         
     }
-    
-    
-    
+    vector<string> letterCombinations(string digits) {
+        if(digits.size() == 0)return result;
+        
+        helper(0,"", digits);
+        
+        return result;
+    }
 };
