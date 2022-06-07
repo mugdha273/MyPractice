@@ -11,10 +11,12 @@ public:
             return;
         }
         
-        helper(nums,i+1,sub);
         sub.push_back(nums[i]);
-        helper(nums,i+1,sub); 
+        helper(nums,i+1,sub);
+        
         sub.pop_back();
+        helper(nums,i+1,sub); 
+        
     }
         
     vector<vector<int>> subsets(vector<int>& nums) {
