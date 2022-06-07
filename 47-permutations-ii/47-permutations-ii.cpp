@@ -13,16 +13,9 @@ public:
         
         for(int i=idx; i<nums.size();i++)
         {
-            if(nums[idx]!=nums[i])
-            {
-                swap(nums[i],nums[idx]);
-                generate(nums, idx+1);
-            }
-            else if (i==idx)
-            {
-                generate(nums, idx+1);
-                
-            }
+            if(i!=idx && nums[i]==nums[idx])    continue;
+            swap(nums[i],nums[idx]);
+            generate(nums,idx+1);
         }
     }
         
