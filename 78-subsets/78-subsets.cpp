@@ -3,19 +3,16 @@ public:
     
     vector<vector<int>>ans;
     
-    void helper(vector<int>&nums, int i, vector<int>&sub)
+    void helper(vector<int>&nums, int idx, vector<int>&sub)
     {
-        if(i==nums.size())
+        ans.push_back(sub);
+        
+        for(int i=idx; i<nums.size();i++)
         {
-            ans.push_back(sub);
-            return;
+            sub.push_back(nums[i]);
+            helper(nums, i+1, sub);
+            sub.pop_back();
         }
-        
-        sub.push_back(nums[i]);
-        helper(nums,i+1,sub);
-        
-        sub.pop_back();
-        helper(nums,i+1,sub); 
         
     }
         
