@@ -3,24 +3,17 @@ public:
     
     vector<vector<int>>ans;
     
-    void helper(vector<int>&nums, int i, vector<int>&sub)
+    void helper(vector<int>&nums, int idx, vector<int>&sub)
     {
-        if(i==nums.size())
+        ans.push_back(sub);
+        
+        for(int i=idx; i<nums.size(); i++)
         {
-            ans.push_back(sub);
-            return;
+            if(i>idx && nums[i]==nums[i-1]) continue;
+            sub.push_back(nums[i]);
+            helper(nums, i+1, sub);
+            sub.pop_back();
         }
-        
-        //when you choose to select ith element
-        sub.push_back(nums[i]);
-        helper(nums,i+1,sub);
-        
-        
-        //when you are skipping the element make sure you skipped the duplicate as well
-        while(i+1<nums.size() && nums[i]==nums[i+1]) i++;
-        
-        sub.pop_back();
-        helper(nums,i+1,sub); 
         
     }
     
