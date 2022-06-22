@@ -9,7 +9,7 @@ public:
         {
             if(!vis[x])
             {
-                // vis[x]=1;
+                vis[x]=1;
                 dfs(adj,vis,x);
             }
         }
