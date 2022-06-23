@@ -27,10 +27,7 @@ class Solution
     int kosaraju(int V, vector<int> adj[])
    {
        
-       for(int i=0;i<V;i++){
-           rev[i].clear();
-           vis[i]=0;
-       }
+       memset(vis,0,sizeof(vis));
        
        for(int i=0;i<V;i++){
            for(int j:adj[i]){
@@ -44,9 +41,8 @@ class Solution
            }
        }
        
-       for(int i=0;i<V+1;i++){
-           vis[i]=0;
-       }
+       memset(vis,0,sizeof(vis));
+       
        int cnt=0;
        while(!st.empty()){
            int cur=st.top();
