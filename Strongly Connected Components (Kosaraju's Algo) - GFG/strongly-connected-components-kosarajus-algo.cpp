@@ -26,9 +26,7 @@ class Solution
     
     int kosaraju(int V, vector<int> adj[])
    {
-       while(!st.empty()){
-           st.pop();
-       }
+       
        for(int i=0;i<V;i++){
            rev[i].clear();
            vis[i]=0;
