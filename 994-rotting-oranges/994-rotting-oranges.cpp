@@ -1,39 +1,58 @@
 class Solution {
 public:
+    //BFS que
+
     int orangesRotting(vector<vector<int>>& grid) {
-         int m = grid.size(), n = grid[0].size(), days = 0, tot = 0, cnt = 0;
+        int m= grid.size();
+        int n= grid[0].size();
         
-        queue<pair<int, int>> rotten;
-        for(int i = 0; i < m; ++i){
-            for(int j = 0; j < n; ++j){
-                if(grid[i][j] != 0) tot++;
-                if(grid[i][j] == 2) rotten.push({i, j});
-            }
-        }
-        int dx[4] = {0, 0, 1, -1};
-        int dy[4] = {1, -1, 0, 0};
+        queue<pair<int,int>>q;
+
+        int ans=0;
+        int countFreshOranges=0;
         
-        while(!rotten.empty())
+        for (int i = 0; i < m; i++)
         {
-            int k= rotten.size();
-            cnt+=k;
-            
-            while(k--)
+            for (int j = 0; j < n; j++)
             {
-                int x = rotten.front().first, y = rotten.front().second;
-                rotten.pop();
-                
-                for(int i=0; i<4; i++)
-                {
-                    int nx = x + dx[i], ny = y + dy[i];
-                    if(nx < 0 || ny < 0 || nx >= m || ny >= n || grid[nx][ny] != 1) continue;
-                    grid[nx][ny]=2;
-                    rotten.push({nx, ny});
-                }
+                if (grid[i][j] == 1)
+                    countFreshOranges++;
+                else if (grid[i][j] == 2)
+                    q.push({i, j});
             }
-             if(!rotten.empty()) days++;
         }
         
-        return tot==cnt?days:-1;
+        while(countFreshOranges != 0 && !q.empty())
+        {
+            int sz= q.size();
+            
+            while(sz--)
+            {
+                pair<int,int>p= q.front();
+                q.pop();
+
+                int ax[4]= {0,0,-1,1};
+                int ay[4]= {-1,1,0,0};
+
+                for(int i=0;i<4;i++)
+                {
+                    int nx= ax[i]+p.first;
+                    int ny = ay[i]+p.second;
+                    
+                    if(nx >= 0 && nx < m && ny >= 0 && ny < n && grid[nx][ny] == 1)
+                    {
+                        grid[nx][ny]=2;
+                        q.push({nx,ny});
+                        countFreshOranges--;
+                    }
+                }
+                
+            }
+            
+            ans++;
+        }
+        
+        return countFreshOranges == 0 ? ans : -1;;
+        
     }
 };
