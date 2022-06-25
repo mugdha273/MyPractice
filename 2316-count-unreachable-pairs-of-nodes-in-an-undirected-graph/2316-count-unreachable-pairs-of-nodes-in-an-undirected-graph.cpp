@@ -18,7 +18,7 @@ public:
         
         vector<int> vis(n,0);
         for(int i=0;i<n;i++){
-            if(vis[i]==0){ // as node is not visited, we find the no. of nodes in current component.
+            if(vis[i]==0){
                 ll cnt = 0;
                 dfs(i,adj,cnt,vis);
                 ans -= (cnt*(cnt-1))/2;
