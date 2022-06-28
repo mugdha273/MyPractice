@@ -17,12 +17,12 @@ public:
         
         vector<int>store;
         
-        if(root->right==NULL && root->left==NULL)
-        {
-            store.push_back(root->val);
-             vec.push_back(store);
-            return vec;
-        }
+//         if(root->right==NULL && root->left==NULL)
+//         {
+//             store.push_back(root->val);
+//              vec.push_back(store);
+//             return vec;
+//         }
         vector<pair<pair<int,int>,int>>s;
         
         queue<pair<TreeNode*, pair<int,int>>>q;
@@ -50,7 +50,6 @@ public:
         }
         sort(s.begin(), s.end());
         
-        for(auto x:s) cout<<x.first.first<<" "<<x.first.second<<" "<<x.second<<endl;
         
         map<int,vector<int>>mp;
         
