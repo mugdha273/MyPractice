@@ -10,30 +10,13 @@
  * };
  */
 class Solution {
-    
 public:
-   set<int>s;
-    
-    void helper(TreeNode* root)
-    {
-        if(root==NULL) return;
-        helper(root->left);
-        s.insert(root->val);
-        helper(root->right);
-    }
-    
     int findSecondMinimumValue(TreeNode* root) {
-        helper(root);
-        int cnt=0;
+        if(root->left == nullptr) return -1;
         
-        for (auto it:s)
-        {
-            cnt++;
-            if(cnt==2)
-            {
-                return it;
-            }
-        }
-        return -1;
+        int l = root->left->val == root->val ? findSecondMinimumValue(root->left) : root->left->val;
+        int r = root->right->val == root->val ? findSecondMinimumValue(root->right) : root->right->val;
+        
+        return l == -1 || r == -1 ? max(l, r) : min(l, r);
     }
 };
