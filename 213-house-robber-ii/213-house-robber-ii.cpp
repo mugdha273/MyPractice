@@ -20,11 +20,15 @@ public:
         int possible_answer1= dp[n-2];
         
         //Rob last house
-        dp[0] = 0;
-        dp[1] = nums[1];
-        for(int i=2 ; i<nums.size() ; i++)
-            dp[i] = max( nums[i]+ dp[i-2], dp[i-1] );
-        int possible_answer2= dp[n-1];
+        vector<int>dp2(n);
+        dp2[0]=0;
+        dp2[1]= nums[1];
+        
+        for(int i=2; i<n; i++)
+        {
+            dp2[i]= max(dp2[i-1], nums[i]+ dp2[i-2]);
+        }
+        int possible_answer2= dp2[n-1];
         
         return max(possible_answer1,possible_answer2);
         
