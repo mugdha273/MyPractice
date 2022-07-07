@@ -1,26 +1,20 @@
 class Solution {
 public:
-    int change(int sum, vector<int>& coins) {
-        int n = coins.size();
-        int dp[n+1][sum+1];
-        for(int i=0; i<sum+1; i++) dp[0][i] = 0;
-        for(int j=1; j<n+1; j++) dp[j][0] = 1;
+    int dp[301][5001];
+    
+    int helper(int n, int amt, vector<int>&coins)
+    {
+        if (n == 0 || amt == 0)
+            return amt == 0 ? 1 : 0;
         
-        for(int i=1; i<=n; i++)
-        {
-            for(int j=1; j<=sum; j++)
-            {
-                if(coins[i-1] > j)
-                {
-                    dp[i][j] = dp[i-1][j];
-                }
-                else
-                {
-                    dp[i][j] = dp[i-1][j]+dp[i][j-coins[i-1]];
-                }
-            }
-        }
-        return dp[n][sum];
+        if(dp[n][amt]!=-1) return dp[n][amt];
         
+        if(coins[n-1]>amt) return dp[n][amt]=helper(n-1,amt,coins);
+        
+         return dp[n][amt]= helper(n-1,amt,coins)+helper(n,amt-coins[n-1],coins);
+    }
+    int change(int amount, vector<int>& coins) {
+        memset(dp,-1,sizeof(dp));
+        return helper(coins.size(), amount, coins);
     }
 };
