@@ -1,27 +1,24 @@
 class Solution {
 public:
-    vector<vector<int>>ans;
+    vector<vector<int>>vec;
     
-    void generate(vector<int>& nums, int idx)
+    void helper(int idx, vector<int>& nums)
     {
-        if(idx==nums.size())
-        {
-            ans.push_back(nums);
-            return;
+        if(idx==nums.size()){
+            vec.push_back(nums);
         }
-        else{
-            for(int i=idx; i<nums.size(); i++)
-            {
-                swap(nums[idx], nums[i]);
-                generate(nums, idx+1);
-                swap(nums[idx], nums[i]);
-            }
+        
+        for(int i=idx; i<nums.size(); i++)
+        {
+            swap(nums[idx],nums[i]);
+            helper(idx+1,nums);
+            swap(nums[idx],nums[i]);
         }
         
     }
+    
     vector<vector<int>> permute(vector<int>& nums) {
-        
-        generate(nums,0);
-        return ans;
+        helper(0,nums);
+        return vec;
     }
 };
